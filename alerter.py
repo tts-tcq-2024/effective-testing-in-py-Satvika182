@@ -5,6 +5,8 @@ def network_alert_stub(celcius):
     # Return 200 for ok
     # Return 500 for not-ok
     # stub always succeeds and returns 200
+    if celcius>200:
+        return 500
     return 200
 
 def alert_in_celcius(farenheit):
@@ -19,7 +21,12 @@ def alert_in_celcius(farenheit):
         alert_failure_count += 0
 
 
-alert_in_celcius(400.5)
-alert_in_celcius(303.6)
+# Tests to trigger both success and failure
+alert_in_celcius(400.5)  # Should fail
+alert_in_celcius(303.6)  # Should pass
+alert_in_celcius(212.0)  # Should pass (boiling point of water)
+
+assert(alert_failure_count == 1)  # Expect 1 failure
+
 print(f'{alert_failure_count} alerts failed.')
 print('All is well (maybe!)')
